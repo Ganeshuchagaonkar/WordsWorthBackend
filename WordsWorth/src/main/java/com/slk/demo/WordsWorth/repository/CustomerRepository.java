@@ -21,4 +21,8 @@ public interface CustomerRepository extends JpaRepository<Customer,Integer>{
 	@Modifying
 	@Query("UPDATE Customer c SET c.contact =:contact WHERE c.customerId =:id")
 	public int updateContactByCustomerId(@Param("id") int id, @Param("contact") long contact );
+	
+	@Modifying
+	@Query("UPDATE Customer c SET c.address =:contact WHERE c.customerId =:id")
+	public int updateAddressByCustomerId(@Param("id") int id, @Param("contact") String address );
 }

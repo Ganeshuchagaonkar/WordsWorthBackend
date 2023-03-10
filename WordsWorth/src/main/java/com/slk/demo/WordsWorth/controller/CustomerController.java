@@ -87,6 +87,20 @@ public class CustomerController {
 	}
 	
 	@Transactional
+	@PutMapping("/customer/address/{id}/{address}")
+	public ResponseEntity<Customer> updateAddressContact(@PathVariable int id, @PathVariable String address){
+		Customer c = service.getCustomerById(id);
+		int res= 0;
+		if(c!=null) {
+			res = service.updateAddressByStudentId(id, address);
+			if(res>0) {
+				c = service.getCustomerById(id);
+			}
+		}
+		return new ResponseEntity<Customer>(c,HttpStatus.OK) ;
+	}
+	
+	@Transactional
 	@DeleteMapping("/customer/{theId}")
 	public void deleteByCustomerId(@PathVariable int theId)
 	{

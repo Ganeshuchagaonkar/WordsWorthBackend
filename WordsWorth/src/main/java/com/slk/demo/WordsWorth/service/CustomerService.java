@@ -48,5 +48,10 @@ public class CustomerService {
 		int res = repo.updateContactByCustomerId(id, contact);
 		return res;
 	}
+	
+	public int updateAddressByStudentId(int id, String address) {
+		int res = repo.updateAddressByCustomerId(id, address);
+		return res;
+	}
 
 }
