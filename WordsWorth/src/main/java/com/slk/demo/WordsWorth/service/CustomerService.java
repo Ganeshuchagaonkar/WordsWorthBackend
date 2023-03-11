@@ -28,13 +28,26 @@ public class CustomerService {
 		return customer;
 	}
 	
-	public Customer save(Customer theCustomer) {
+//	public Customer save(Customer theCustomer) {
+//
+//		Customer customer = repo.save(theCustomer);
+//		return customer;
+//	}
+	
+	public Customer saveCustomer(Customer theCustomer) {
+		Customer customer = repo.findTopByOrderByCustomerIdDesc();
+		int id=1;
+		if(customer !=null) {
+			id = customer.getCustomerId() + 1;
+		}
+		theCustomer.setCustomerId(id);
 		
-		Customer customer = repo.save(theCustomer);
+		customer = repo.save(theCustomer);
 		return customer;
+		
 	}
 	
-	public void deleteById(int theId) {
+	public void deleteByCustomerId(int theId) {
 		
 		repo.deleteById(theId);
 	}

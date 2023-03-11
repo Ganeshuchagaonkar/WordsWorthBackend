@@ -19,7 +19,7 @@ import com.slk.demo.WordsWorth.entity.Customer;
 import com.slk.demo.WordsWorth.service.CustomerService;
 
 
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 
 
 @RestController
@@ -53,7 +53,7 @@ public class CustomerController {
 	
 	@PostMapping("/customers")
 	public ResponseEntity<Customer> addCustomer(@RequestBody Customer theCustomer ) {
-		Customer cust = service.save(theCustomer);
+		Customer cust = service.saveCustomer(theCustomer);
 		return new ResponseEntity<Customer>(cust,HttpStatus.OK) ;
 	}
 	
@@ -104,7 +104,7 @@ public class CustomerController {
 	@DeleteMapping("/customer/{theId}")
 	public void deleteByCustomerId(@PathVariable int theId)
 	{
-		service.deleteById(theId);
+		service.deleteByCustomerId(theId);
 	    Customer st = service.getCustomerById(theId);
 	    
 	}

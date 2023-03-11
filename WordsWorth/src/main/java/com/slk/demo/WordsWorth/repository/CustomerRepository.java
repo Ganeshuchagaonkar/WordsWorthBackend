@@ -4,15 +4,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
 import com.slk.demo.WordsWorth.entity.Customer;
 
 
-
-
+@Repository
 public interface CustomerRepository extends JpaRepository<Customer,Integer>{
-
-	public Customer findByCustomerId(int id);
+	public Customer findByCustomerId(Integer id);
 	public Customer findByEmail(String email);
+
 	
 	@Modifying
 	@Query("UPDATE Customer c SET c.password =:pass WHERE c.customerId =:id")
@@ -23,6 +24,9 @@ public interface CustomerRepository extends JpaRepository<Customer,Integer>{
 	public int updateContactByCustomerId(@Param("id") int id, @Param("contact") long contact );
 	
 	@Modifying
-	@Query("UPDATE Customer c SET c.address =:contact WHERE c.customerId =:id")
-	public int updateAddressByCustomerId(@Param("id") int id, @Param("contact") String address );
+	@Query("UPDATE Customer c SET c.address =:address WHERE c.customerId =:id")
+	public int updateAddressByCustomerId(@Param("id") int id, @Param("address") String address );
+	
+	public Customer findTopByOrderByCustomerIdDesc();
+
 }
